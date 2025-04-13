@@ -1,0 +1,420 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Fredoka One', 'Comic Sans MS', cursive, sans-serif;
+}
+
+body {
+    background-color: #2d2d2d;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    overflow: hidden;
+    background-image: linear-gradient(45deg, #222 25%, transparent 25%),
+        linear-gradient(-45deg, #222 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #222 75%),
+        linear-gradient(-45deg, transparent 75%, #222 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+
+#game-container {
+    width: 1600px;
+    height: 900px;
+    position: relative;
+    background-color: #333;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    overflow: hidden;
+    border: 4px solid #444;
+}
+
+.screen {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.hidden {
+    display: none;
+    transform: translateY(50px);
+    opacity: 0;
+}
+
+/* Main Menu Styles */
+#main-menu {
+    background-color: #222;
+    z-index: 10;
+    background-image: 
+        radial-gradient(circle at 25% 30%, #444 0%, transparent 10%),
+        radial-gradient(circle at 75% 70%, #444 0%, transparent 10%),
+        radial-gradient(circle at 50% 50%, #333 0%, #222 100%);
+}
+
+h1 {
+    font-size: 6em;
+    margin-bottom: 40px;
+    color: #0af;
+    text-shadow: 
+        0 5px 0 #08a,
+        0 0 20px rgba(0, 170, 255, 0.5);
+    letter-spacing: 2px;
+    transform: rotate(-2deg);
+}
+
+/* Pulse animation for buttons */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.pulse-animation {
+    animation: pulse 1s infinite;
+}
+
+/* Upgrade button click animation */
+.upgrade-clicked {
+    animation: buttonPulse 0.2s ease;
+    background-color: #0af !important;
+}
+
+@keyframes buttonPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Name Input Styles */
+.name-input-container {
+    margin-bottom: 30px;
+    width: 300px;
+}
+
+#player-name-input {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2em;
+    background-color: rgba(255, 255, 255, 0.1);
+    border: 2px solid #0af;
+    border-radius: 5px;
+    color: #fff;
+    text-align: center;
+    transition: all 0.2s ease;
+}
+
+#player-name-input:focus {
+    outline: none;
+    background-color: rgba(255, 255, 255, 0.2);
+    box-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+}
+
+#player-name-input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+
+.menu-options {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+
+button {
+    padding: 12px 24px;
+    font-size: 1.2em;
+    background-color: #0af;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+button:hover {
+    background-color: #09d;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 170, 255, 0.4);
+}
+
+button:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+#party-list-container {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#party-list-container h2 {
+    text-align: center;
+    margin-bottom: 15px;
+    color: #0af;
+}
+
+.party-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background-color 0.2s ease;
+}
+
+.party-item:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    cursor: pointer;
+}
+
+/* Party Lobby Styles */
+#party-lobby {
+    background-color: #222;
+    z-index: 5;
+}
+
+#party-info {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 5px;
+}
+
+#player-list {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 10px;
+    padding: 20px;
+    width: 400px;
+    margin-bottom: 30px;
+    max-height: 300px;
+}
+
+.player-item {
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 8px 0;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.lobby-controls {
+    display: flex;
+    gap: 20px;
+}
+
+/* Game Screen Styles */
+#game-screen {
+    background-color: #111;
+}
+
+#game-canvas {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+}
+
+#game-ui {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 2;
+    pointer-events: none;
+}
+
+#wave-info {
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 24px;
+    color: #fff;
+    text-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+#player-info {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 300px;
+}
+
+#health-bar, #xp-bar {
+    height: 20px;
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    margin-bottom: 5px;
+    overflow: hidden;
+}
+
+#health-fill {
+    height: 100%;
+    width: 100%;
+    background-color: #f55;
+    transition: width 0.3s ease;
+}
+
+#xp-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #0f5;
+    transition: width 0.3s ease;
+}
+
+#upgrade-toggle-btn {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    pointer-events: auto;
+}
+
+#upgrade-menu {
+    position: absolute;
+    right: 20px;
+    bottom: 70px;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    border-radius: 10px;
+    width: 250px;
+    pointer-events: auto;
+}
+
+#upgrade-menu h3 {
+    color: #0af;
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+#upgrade-menu button {
+    display: block;
+    width: 100%;
+    margin-bottom: 8px;
+    background-color: #06c;
+    font-size: 14px;
+}
+
+#upgrade-menu button:hover {
+    background-color: #08f;
+}
+
+/* Game Object Styles */
+.player {
+    border-radius: 50%;
+    border: 2px solid #fff;
+}
+
+.projectile {
+    background-color: #fff;
+    border-radius: 50%;
+}
+
+.enemy {
+    border-radius: 50%;
+}
+
+/* Upgrade Popup Styles */
+.upgrade-popup {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 500px;
+    background-color: rgba(40, 40, 40, 0.95);
+    border: 3px solid #0af;
+    border-radius: 10px;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 0 20px rgba(0, 170, 255, 0.5);
+    z-index: 1000;
+    text-align: center;
+}
+
+.upgrade-popup h2 {
+    margin-top: 0;
+    color: #0af;
+    font-size: 24px;
+    text-shadow: 0 0 10px rgba(0, 170, 255, 0.5);
+    margin-bottom: 5px;
+}
+
+.upgrade-popup .wave-info {
+    color: #ff8;
+    font-size: 18px;
+    margin-bottom: 15px;
+    text-shadow: 0 0 8px rgba(255, 255, 128, 0.7);
+}
+
+.upgrade-choices {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.upgrade-choice {
+    flex: 1;
+    background-color: rgba(70, 70, 70, 0.7);
+    border: 2px solid #555;
+    border-radius: 8px;
+    padding: 10px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.upgrade-choice:hover {
+    background-color: rgba(0, 170, 255, 0.3);
+    border-color: #0af;
+    transform: scale(1.05);
+}
+
+.upgrade-choice h3 {
+    margin-top: 0;
+    color: #0af;
+    font-size: 18px;
+    margin-bottom: 8px;
+}
+
+.upgrade-choice p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #ddd;
+}
+
+.upgrade-cost {
+    display: block;
+    margin-top: 8px;
+    font-weight: bold;
+    color: #0f5;
+}
+
+/* Screen shake animation for upgrades */
+@keyframes screenShake {
+    0% { transform: translateX(0); }
+    25% { transform: translateX(-5px); }
+    50% { transform: translateX(5px); }
+    75% { transform: translateX(-5px); }
+    100% { transform: translateX(0); }
+}
+
+.screen-shake {
+    animation: screenShake 0.3s ease;
+} 

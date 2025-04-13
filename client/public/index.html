@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wave Defense Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="game-container">
+        <!-- Main Menu -->
+        <div id="main-menu" class="screen">
+            <h1>Wave Defense</h1>
+            
+            <!-- Name Input -->
+            <div class="name-input-container">
+                <input type="text" id="player-name-input" placeholder="Enter your name" maxlength="15">
+            </div>
+            
+            <div class="menu-options">
+                <button id="create-party-btn">Create Party</button>
+                <button id="join-party-btn">Join Party</button>
+            </div>
+            
+            <!-- Party List -->
+            <div id="party-list-container">
+                <h2>Available Parties</h2>
+                <div id="party-list"></div>
+            </div>
+        </div>
+        
+        <!-- Party Lobby -->
+        <div id="party-lobby" class="screen hidden">
+            <h1>Party Lobby</h1>
+            <div id="party-info">
+                <span id="party-id"></span>
+                <span id="party-count">0/4</span>
+            </div>
+            <div id="player-list"></div>
+            <div class="lobby-controls">
+                <button id="start-game-btn">Start Game</button>
+                <button id="leave-party-btn">Leave Party</button>
+            </div>
+        </div>
+        
+        <!-- Game Screen -->
+        <div id="game-screen" class="screen hidden">
+            <div id="game-ui">
+                <div id="wave-info">Wave: <span id="wave-number">1</span></div>
+                <div id="player-info">
+                    <div id="health-bar">
+                        <div id="health-fill"></div>
+                    </div>
+                    <div id="xp-bar">
+                        <div id="xp-fill"></div>
+                    </div>
+                </div>
+                <div id="upgrade-menu" class="hidden">
+                    <h3>Upgrades</h3>
+                    <button class="upgrade-btn" data-upgrade="speed">Speed (+0.5)</button>
+                    <button class="upgrade-btn" data-upgrade="damage">Damage (+2)</button>
+                    <button class="upgrade-btn" data-upgrade="fireRate">Fire Rate (+0.5)</button>
+                    <button class="upgrade-btn" data-upgrade="health">Health (+10)</button>
+                    <button class="upgrade-btn" data-upgrade="evolve">Evolve (50 XP)</button>
+                </div>
+                <button id="upgrade-toggle-btn">Upgrades</button>
+            </div>
+            <canvas id="game-canvas"></canvas>
+        </div>
+    </div>
+    
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="js/game.js" type="module"></script>
+</body>
+</html> 
